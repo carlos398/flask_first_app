@@ -1,14 +1,30 @@
-from flask import Flask 
+from flask import Flask , render_template
+from flask import request
+from flask_mysqldb import MySQL
 
 app = Flask(__name__)
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'flaskcontacts'
+mysql = MySQL(app)
 
 @app.route('/')
 def Index():
-    return 'Hello world'
+    return render_template('index.html')
 
-@app.route('/add_contact')
+@app.route('/add_contact', methods=['POST'])
 def add_contact():
-    return 'agregar contacto'
+    if request.method == 'POST':
+        fullname = request.form['fullname']
+        phone = request.form['phone']
+        email = request.form['email']
+        cur = mysql.connection.cursor()
+        cur.execute('INSERT INTO contacts (full_name, phone, email) VALUES (%s, %s, %s)',
+        (fullname, phone, email))
+        mysql.connection.commit()
+        return 'recivido'
+
 
 @app.route('/edit')
 def edit_contact():
