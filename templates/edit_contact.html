@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="col-md4 offset-md-2">
+    <div class="card card-body">
+        <form action="/update/{{contact.0}}" method="POST">
+            <div class="form-group row">
+                <input type="text" name="fullname" placeholder="full name" value="{{ contact.1}}" class="form-control">
+            </div>
+            <br>
+            <div class="form-group row">
+                <input type="text" name="phone" placeholder="Phone" value="{{ contact.2}}" class="form-control">
+            </div>
+            <br>
+            <div class="form-group row">
+                <input type="text" name="email" placeholder="Email" value="{{ contact.3}}" class="form-control">
+            </div>
+            <br>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-lg btn-success"> guardar </button>
+            </div>  
+        </form>
+    </div>
+</div>
+
+{% endblock %}
