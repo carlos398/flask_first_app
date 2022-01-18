@@ -40,7 +40,7 @@ def get_contact(id):
     cur = mysql.connection.cursor()
     cur.execute('SELECT * FROM contacts WHERE id = {0}'.format(id))
     data = cur.fetchall()
-    return render_template('edit_contact.html', contact = data[0])
+    return render_template('edit_contact.html', contact = data[0]) #la lista en el indice 0 o [0] se usa para recibir solo la tupla para editar
 
 
 @app.route('/update/<id>', methods = ['POST'])
